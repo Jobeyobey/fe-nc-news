@@ -1,6 +1,5 @@
-navbar {
-    top: 0;
-    position: fixed;
+nav {
+    position: sticky;
     width: 100%;
     background: steelblue;
 }
