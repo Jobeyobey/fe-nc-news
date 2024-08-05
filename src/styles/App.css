@@ -3,3 +3,25 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+html,
+body {
+    height: 100%;
+    border: 2px solid red;
+}
+
+#root {
+    height: 100%;
+}
+
+body {
+    background-color: #efefef;
+}
+
+.page-container {
+    padding: 1rem;
+    max-width: 768px;
+    margin: auto;
+    height: 100%;
+    background: white;
+}
