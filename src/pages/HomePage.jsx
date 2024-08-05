@@ -5,6 +5,8 @@ import Article from "../components/Article";
 
 function HomePage() {
     const [articles, setArticles] = useState({});
+    const [articlesPage, setArticlesPage] = useState(1);
+    console.log(articles);
 
     useEffect(() => {
         getArticles().then((response) => {
@@ -15,7 +17,17 @@ function HomePage() {
     let articleElements = [];
     if (Object.keys(articles).length) {
         articleElements = articles.articles.map((article) => {
-            return <Article key={article.article_id} title={article.title} />;
+            return (
+                <Article
+                    key={article.article_id}
+                    topic={article.topic}
+                    title={article.title}
+                    author={article.author}
+                    createdAt={article.created_at}
+                    votes={article.votes}
+                    commentCount={article.comment_count}
+                />
+            );
         });
     }
 
