@@ -7,10 +7,13 @@ import PaginationButtons from "../components/PaginationButtons";
 function HomePage() {
     const [articles, setArticles] = useState({});
     const [articlesPage, setArticlesPage] = useState(1);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
+        setIsLoading(true);
         getArticles(articlesPage).then((response) => {
             setArticles(response);
+            setIsLoading(false);
         });
     }, [articlesPage]);
 
@@ -35,7 +38,9 @@ function HomePage() {
 
     return (
         <section className="page-container">
-            {Object.keys(articles).length > 0 && (
+            {isLoading ? (
+                <h1>Loading...</h1>
+            ) : (
                 <>
                     {articleElements}
                     <PaginationButtons
