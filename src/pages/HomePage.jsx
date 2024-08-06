@@ -2,17 +2,17 @@ import { useEffect, useState } from "react";
 import "../styles/HomePage.css";
 import { getArticles } from "../api";
 import Article from "../components/Article";
+import PaginationButtons from "../components/PaginationButtons";
 
 function HomePage() {
     const [articles, setArticles] = useState({});
     const [articlesPage, setArticlesPage] = useState(1);
-    console.log(articles);
 
     useEffect(() => {
-        getArticles().then((response) => {
+        getArticles(articlesPage).then((response) => {
             setArticles(response);
         });
-    }, []);
+    }, [articlesPage]);
 
     let articleElements = [];
     if (Object.keys(articles).length) {
@@ -31,7 +31,20 @@ function HomePage() {
         });
     }
 
-    return <section className="page-container">{articleElements}</section>;
+    return (
+        <section className="page-container">
+            {Object.keys(articles).length > 0 && (
+                <>
+                    {articleElements}
+                    <PaginationButtons
+                        totalArticles={articles.article_count}
+                        articlesPage={articlesPage}
+                        setArticlesPage={setArticlesPage}
+                    />
+                </>
+            )}
+        </section>
+    );
 }
 
 export default HomePage;
