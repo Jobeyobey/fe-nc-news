@@ -9,10 +9,6 @@
     border-radius: 5px;
 }
 
-.list-article-container:hover {
-    cursor: pointer;
-}
-
 .list-article-top {
     display: flex;
     justify-content: space-between;

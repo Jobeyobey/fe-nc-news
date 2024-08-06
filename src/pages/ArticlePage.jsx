@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getArticleById } from "../api";
+import "../styles/ArticlePage.css";
+import { dateToString } from "../utils";
 
 function ArticlePage() {
     const [article, setArticle] = useState({});
@@ -13,13 +15,21 @@ function ArticlePage() {
         });
     }, []);
 
+    const date = dateToString(article.created_at);
+
     return (
         <section className="page-container">
-            <img src={article.article_img_url} />
-            <p>{article.topic}</p>
-            <h1>{article.title}</h1>
-            <h2>{article.author}</h2>
-            <p>{article.created_at}</p>
+            <Link to="/">← Home</Link>
+            <img
+                src={article.article_img_url}
+                className="article-page-hero-image"
+            />
+            <div className="article-page-info">
+                <p>{article.topic}</p>
+                <p>{date}</p>
+            </div>
+            <h1 className="article-page-title">{article.title}</h1>
+            <p className="article-page-author">by {article.author}</p>
             <p>{article.body}</p>
         </section>
     );
