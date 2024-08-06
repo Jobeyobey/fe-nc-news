@@ -7,3 +7,9 @@ export function getArticles(page) {
         return data;
     });
 }
+
+export function getArticleById(articleId) {
+    return axios.get(`api/articles/${articleId}`).then(({ data }) => {
+        return data.article;
+    });
+}

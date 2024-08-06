@@ -1,0 +1,18 @@
+.article-page-hero-image {
+    margin: 1rem 0;
+    width: 100%;
+    border-radius: 15px;
+}
+
+.article-page-info {
+    display: flex;
+    justify-content: space-between;
+}
+
+.article-page-title {
+    margin: 1rem 0 0.2rem 0;
+}
+
+.article-page-author {
+    margin: 0 0 1rem 0;
+}

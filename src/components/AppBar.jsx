@@ -5,7 +5,9 @@ function AppBar() {
     return (
         <nav>
             <div className="buttons-container">
-                <Link className="nav-logo">Logo</Link>
+                <Link to="/" className="nav-logo">
+                    Logo
+                </Link>
                 <div>
                     <Link className="nav-button">Create</Link>
                     <Link className="nav-button">Logout</Link>
