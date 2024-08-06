@@ -20,6 +20,7 @@ function HomePage() {
             return (
                 <Article
                     key={article.article_id}
+                    imgURL={article.article_img_url}
                     articleId={article.article_id}
                     topic={article.topic}
                     title={article.title}
