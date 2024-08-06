@@ -1,0 +1,26 @@
+nav {
+    position: sticky;
+    width: 100%;
+    background: steelblue;
+}
+
+.buttons-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+}
+
+.nav-logo,
+.nav-button {
+    color: white;
+    text-decoration: none;
+}
+
+.nav-logo:hover,
+.nav-button:hover {
+    opacity: 0.8;
+}
+
+.nav-button {
+    padding-left: 1rem;
+}
