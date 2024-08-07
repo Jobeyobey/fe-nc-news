@@ -17,6 +17,37 @@
     margin: 0 0 1rem 0;
 }
 
+.votes-container {
+    display: flex;
+    margin-bottom: 1.5rem;
+}
+
+.vote-text {
+    margin: 0rem 1.5rem;
+}
+
+.vote-btn {
+    scale: 1.5;
+    cursor: pointer;
+    pointer-events: none;
+}
+
+.vote-disabled {
+    color: gray;
+}
+
+.vote-up {
+    color: green;
+}
+
+.vote-down {
+    color: red;
+}
+
+.vote-disabled:hover {
+    opacity: 0.9;
+}
+
 .view-comments-btn {
     margin-top: 2rem;
     padding: 0.5rem;
