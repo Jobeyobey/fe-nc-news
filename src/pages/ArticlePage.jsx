@@ -4,12 +4,14 @@ import { getArticleById } from "../api";
 import "../styles/ArticlePage.css";
 import { dateToString } from "../utils";
 import CommentSection from "../components/CommentSection";
+import Votes from "../components/Votes";
 
 function ArticlePage() {
     const [article, setArticle] = useState({});
     const [isLoading, setIsLoading] = useState(true);
 
     const params = useParams();
+    const date = dateToString(article.created_at);
 
     useEffect(() => {
         setIsLoading(true);
@@ -18,8 +20,6 @@ function ArticlePage() {
             setIsLoading(false);
         });
     }, []);
-
-    const date = dateToString(article.created_at);
 
     return (
         <section className="page-container">
@@ -38,6 +38,10 @@ function ArticlePage() {
                     </div>
                     <h1 className="article-page-title">{article.title}</h1>
                     <p className="article-page-author">by {article.author}</p>
+                    <Votes
+                        votes={article.votes}
+                        articleId={article.article_id}
+                    />
                     <p>{article.body}</p>
                     <CommentSection
                         articleId={article.article_id}
