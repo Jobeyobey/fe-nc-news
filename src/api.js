@@ -13,3 +13,11 @@ export function getArticleById(articleId) {
         return data.article;
     });
 }
+
+export function getCommentsByArticleId(articleId, page) {
+    return axios
+        .get(`api/articles/${articleId}/comments`, { params: { page } })
+        .then(({ data }) => {
+            return data.comments;
+        });
+}

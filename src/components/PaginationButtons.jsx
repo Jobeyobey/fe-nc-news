@@ -1,6 +1,6 @@
-function PaginationButtons({ totalArticles, articlesPage, setArticlesPage }) {
+function PaginationButtons({ totalCount, currPage, setCurrPage }) {
     // Once num articles displayed can be picked, maxPageNum must be updated to be dynamic
-    const maxPageNum = Math.ceil(totalArticles / 10);
+    const maxPageNum = Math.ceil(totalCount / 10);
 
     function handleClick(e) {
         let adjustment = 0;
@@ -10,20 +10,20 @@ function PaginationButtons({ totalArticles, articlesPage, setArticlesPage }) {
             adjustment = 1;
         }
 
-        setArticlesPage((currPage) => (currPage += adjustment));
+        setCurrPage((currPage) => (currPage += adjustment));
     }
 
     return (
         <div className="pagination-container">
-            {articlesPage > 1 && (
+            {currPage > 1 && (
                 <button id="page-back" onClick={handleClick}>
                     Back
                 </button>
             )}
             <p>
-                Page {articlesPage} of {maxPageNum}
+                Page {currPage} of {maxPageNum}
             </p>
-            {articlesPage < maxPageNum && (
+            {currPage < maxPageNum && (
                 <button id="page-next" onClick={handleClick}>
                     Next
                 </button>

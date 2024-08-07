@@ -44,9 +44,9 @@ function HomePage() {
                 <>
                     {articleElements}
                     <PaginationButtons
-                        totalArticles={articles.article_count}
-                        articlesPage={articlesPage}
-                        setArticlesPage={setArticlesPage}
+                        totalCount={articles.article_count}
+                        currPage={articlesPage}
+                        setCurrPage={setArticlesPage}
                     />
                 </>
             )}

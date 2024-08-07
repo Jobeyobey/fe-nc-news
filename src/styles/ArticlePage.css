@@ -16,3 +16,28 @@
 .article-page-author {
     margin: 0 0 1rem 0;
 }
+
+.view-comments-btn {
+    margin-top: 2rem;
+    padding: 0.5rem;
+}
+
+.comment-section {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: #efefef;
+    border-radius: 10px;
+}
+
+.comment-container {
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: white;
+    border-radius: 10px;
+}
+
+.comment-top {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
