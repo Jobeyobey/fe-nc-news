@@ -3,6 +3,7 @@ import { Link, useParams } from "react-router-dom";
 import { getArticleById } from "../api";
 import "../styles/ArticlePage.css";
 import { dateToString } from "../utils";
+import CommentSection from "../components/CommentSection";
 
 function ArticlePage() {
     const [article, setArticle] = useState({});
@@ -38,6 +39,10 @@ function ArticlePage() {
                     <h1 className="article-page-title">{article.title}</h1>
                     <p className="article-page-author">by {article.author}</p>
                     <p>{article.body}</p>
+                    <CommentSection
+                        articleId={article.article_id}
+                        commentCount={article.comment_count}
+                    />
                 </>
             )}
         </section>
