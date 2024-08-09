@@ -21,3 +21,8 @@ body {
     gap: 1rem;
     justify-content: center;
 }
+
+.error-text {
+    margin: 1rem 0;
+    color: red;
+}
