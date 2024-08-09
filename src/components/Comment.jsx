@@ -42,7 +42,8 @@ function Comment({ commentId, author, createdAt, body, setComments }) {
             <div className="comment-top">
                 <p>{author}</p>
                 <p>{dateString}</p>
-                {isDeleting ? (
+                {author !==
+                localStorage.getItem("username") ? null : isDeleting ? (
                     <button disabled>Deleting...</button>
                 ) : (
                     author !== "[Deleted]" && (
