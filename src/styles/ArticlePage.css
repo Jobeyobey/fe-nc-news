@@ -49,7 +49,6 @@
 }
 
 .view-comments-btn {
-    margin-top: 2rem;
     padding: 0.5rem;
 }
 
@@ -60,8 +59,12 @@
     border-radius: 10px;
 }
 
+.comment-section-title {
+    margin-bottom: 1.5rem;
+}
+
 .comment-container {
-    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
     padding: 1rem;
     background: white;
     border-radius: 10px;
