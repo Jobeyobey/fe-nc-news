@@ -14,10 +14,10 @@ export function getAllTopics() {
     });
 }
 
-export function getArticles(page, topic) {
-    if (topic === "All Topics") topic = undefined;
+export function getArticles(page, topic, sort_by, order) {
+    if (topic === "all-topics") topic = undefined;
     return axios
-        .get("articles", { params: { page, topic } })
+        .get("articles", { params: { page, topic, sort_by, order } })
         .then(({ data }) => {
             return data;
         });
