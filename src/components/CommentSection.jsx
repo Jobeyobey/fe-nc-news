@@ -9,23 +9,12 @@ function CommentSection({ articleId, commentCount }) {
     const [comments, setComments] = useState([]);
     const [commentsPage, setCommentsPage] = useState(1);
 
-    function handleClick() {
-        setIsEnabled(true);
+    useEffect(() => {
         setIsLoading(true);
         getCommentsByArticleId(articleId, commentsPage).then((response) => {
             setComments(response);
             setIsLoading(false);
         });
-    }
-
-    useEffect(() => {
-        if (isEnabled) {
-            setIsLoading(true);
-            getCommentsByArticleId(articleId, commentsPage).then((response) => {
-                setComments(response);
-                setIsLoading(false);
-            });
-        }
     }, [commentsPage]);
 
     const commentElements = comments.map((comment) => {
@@ -40,25 +29,23 @@ function CommentSection({ articleId, commentCount }) {
     });
 
     return (
-        <>
-            {isLoading ? (
+        <section className="comment-section">
+            {commentCount === 0 ? (
+                <h2>No Comments</h2>
+            ) : isLoading ? (
                 <h2>Loading...</h2>
-            ) : isEnabled ? (
-                <section className="comment-section">
-                    <h2>Comments</h2>
+            ) : (
+                <>
+                    <h2 className="comment-section-title">Comments</h2>
                     {commentElements}
                     <PaginationButtons
                         totalCount={commentCount}
                         currPage={commentsPage}
                         setCurrPage={setCommentsPage}
                     />
-                </section>
-            ) : (
-                <button className="view-comments-btn" onClick={handleClick}>
-                    View Comments
-                </button>
+                </>
             )}
-        </>
+        </section>
     );
 }
 
