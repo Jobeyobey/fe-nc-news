@@ -70,6 +70,12 @@
     border-radius: 10px;
 }
 
+.comment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
 .comment-top {
     display: flex;
     gap: 1rem;

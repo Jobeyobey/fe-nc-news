@@ -29,3 +29,14 @@ export function voteArticleById(articleId, vote) {
             return data.article;
         });
 }
+
+export function postCommentToArticle(articleId, body) {
+    return axios
+        .post(`articles/${articleId}/comments`, {
+            username: "grumpy19", // Hardcoded in user until a login page is created after core tasks
+            body,
+        })
+        .then(({ data }) => {
+            return data.comment;
+        });
+}
