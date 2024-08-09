@@ -2,6 +2,12 @@ import axios from "axios";
 
 axios.defaults.baseURL = "https://be-nc-news-q2go.onrender.com/api/";
 
+export function getAllUsers() {
+    return axios.get("users").then(({ data }) => {
+        return data.users;
+    });
+}
+
 export function getArticles(page) {
     return axios.get("articles", { params: { page } }).then(({ data }) => {
         return data;
