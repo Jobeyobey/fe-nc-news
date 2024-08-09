@@ -8,10 +8,19 @@ export function getAllUsers() {
     });
 }
 
-export function getArticles(page) {
-    return axios.get("articles", { params: { page } }).then(({ data }) => {
-        return data;
+export function getAllTopics() {
+    return axios.get("topics").then(({ data }) => {
+        return data.topics;
     });
+}
+
+export function getArticles(page, topic) {
+    if (topic === "All Topics") topic = undefined;
+    return axios
+        .get("articles", { params: { page, topic } })
+        .then(({ data }) => {
+            return data;
+        });
 }
 
 export function getArticleById(articleId) {
