@@ -23,9 +23,11 @@ function CommentSection({ articleId, commentCount }) {
         return (
             <Comment
                 key={comment.comment_id}
+                commentId={comment.comment_id}
                 author={comment.author}
                 createdAt={comment.created_at}
                 body={comment.body}
+                setComments={setComments}
             />
         );
     });

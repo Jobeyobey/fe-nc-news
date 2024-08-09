@@ -10,7 +10,9 @@ function AppBar() {
                 </Link>
                 <div>
                     <Link className="nav-button">Create</Link>
-                    <Link className="nav-button">Logout</Link>
+                    <Link className="nav-button" to="/logout">
+                        Logout
+                    </Link>
                 </div>
             </div>
         </nav>
