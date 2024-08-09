@@ -40,3 +40,9 @@ export function postCommentToArticle(articleId, body) {
             return data.comment;
         });
 }
+
+export function deleteCommentById(commentId) {
+    return axios.delete(`comments/${commentId}`).then(() => {
+        return "Deleted";
+    });
+}
