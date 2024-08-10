@@ -9,7 +9,7 @@ function CommentSection({ articleId, commentCount }) {
     const [commentsPage, setCommentsPage] = useState(1);
     const [newCommentBody, setNewCommentBody] = useState("");
     const [isPostingComment, setIsPostingComment] = useState(false);
-    const [isError, setIsError] = useState(false);
+    const [error, setError] = useState({});
 
     useEffect(() => {
         setIsLoading(true);
@@ -38,29 +38,25 @@ function CommentSection({ articleId, commentCount }) {
 
     function handleSubmit(e) {
         e.preventDefault();
-        setIsError(() => false);
+        setError({});
         if (newCommentBody === "") {
-            setIsError(() => {
-                return { msg: "Please write a comment before submitting" };
-            });
+            setError({ msg: "Please write a comment before submitting" });
         } else {
-            setIsPostingComment(() => true);
+            setIsPostingComment(true);
             postCommentToArticle(articleId, newCommentBody)
                 .then((newComment) => {
                     setComments((currComments) => {
                         return [newComment, ...currComments];
                     });
-                    setIsPostingComment(() => false);
+                    setIsPostingComment(false);
                 })
                 .catch(() => {
-                    setIsError(() => {
-                        return {
-                            msg: "Unable to post comment. Check your internet connection",
-                        };
+                    setError({
+                        msg: "Unable to post comment. Check your internet connection",
                     });
-                    setIsPostingComment(() => false);
+                    setIsPostingComment(false);
                 });
-            setNewCommentBody(() => "");
+            setNewCommentBody("");
         }
     }
 
@@ -94,8 +90,8 @@ function CommentSection({ articleId, commentCount }) {
                             ) : (
                                 <button type="submit">Submit</button>
                             )}
-                            {isError && (
-                                <p className="error-text">{isError.msg}</p>
+                            {Object.keys(error).length > 0 && (
+                                <p className="error-text">{error.msg}</p>
                             )}
                         </form>
                     </div>

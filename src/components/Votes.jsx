@@ -9,37 +9,43 @@ import { voteArticleById } from "../api";
 function Votes({ votes, articleId }) {
     const [voteStatus, setVoteStatus] = useState(null);
     const [voteTracker, setVoteTracker] = useState(votes);
-    const [isError, setIsError] = useState(false);
+    const [error, setError] = useState({});
 
     function handleVote(e) {
-        setIsError(() => false);
+        setError({});
 
         if (e.target.id === "vote-up" && voteStatus !== "vote-up") {
-            setVoteStatus(() => "vote-up");
-            setVoteTracker(() => votes + 1);
+            setVoteStatus("vote-up");
+            setVoteTracker(votes + 1);
             voteArticleById(articleId, 1).catch(() => {
-                setIsError(() => true);
-                setVoteStatus(() => null);
-                setVoteTracker(() => votes);
+                setError({
+                    msg: "Unable to vote - Check your internet connection",
+                });
+                setVoteStatus(null);
+                setVoteTracker(votes);
             });
         } else if (e.target.id === "vote-down" && voteStatus !== "vote-down") {
-            setVoteStatus(() => "vote-down");
-            setVoteTracker(() => votes - 1);
+            setVoteStatus("vote-down");
+            setVoteTracker(votes - 1);
             voteArticleById(articleId, -1).catch(() => {
-                setIsError(() => true);
-                setVoteStatus(() => null);
-                setVoteTracker(() => votes);
+                setError({
+                    msg: "Unable to vote - Check your internet connection",
+                });
+                setVoteStatus(null);
+                setVoteTracker(votes);
             });
         } else {
             const voteInc = voteStatus === "vote-up" ? -1 : 1;
             const currVoteStatus = voteStatus;
             const currVotes = voteTracker;
             setVoteStatus(null);
-            setVoteTracker(() => votes);
+            setVoteTracker(votes);
             voteArticleById(articleId, voteInc).catch(() => {
-                setIsError(() => true);
-                setVoteTracker(() => currVotes);
-                setVoteStatus(() => currVoteStatus);
+                setError({
+                    msg: "Unable to vote - Check your internet connection",
+                });
+                setVoteTracker(currVotes);
+                setVoteStatus(currVoteStatus);
             });
         }
     }
@@ -69,7 +75,7 @@ function Votes({ votes, articleId }) {
                     />
                 </div>
             </div>
-            {isError && (
+            {Object.keys(error).length > 0 && (
                 <p className="error-text">
                     Unable to vote - Check your internet connection
                 </p>

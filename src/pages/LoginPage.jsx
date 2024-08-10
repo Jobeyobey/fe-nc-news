@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 function LoginPage() {
     const [usernameInput, setUsernameInput] = useState("");
     const [users, setUsers] = useState([]);
-    const [isError, setIsError] = useState(false);
+    const [error, setError] = useState({});
     const [successfulLogin, setSuccessfulLogin] = useState(false);
 
     const navigate = useNavigate();
@@ -27,13 +27,13 @@ function LoginPage() {
 
     function handleSubmit(e) {
         e.preventDefault();
-        setIsError(false);
+        setError({});
         const inputName = e.target["username-input"].value;
         if (users.find((user) => user.username === inputName)) {
             localStorage.setItem("username", inputName);
-            setSuccessfulLogin(() => true);
+            setSuccessfulLogin(true);
         } else {
-            setIsError({ msg: "User does not exist. Test Account: grumpy19" });
+            setError({ msg: "User does not exist. Test Account: grumpy19" });
         }
     }
 
@@ -52,7 +52,9 @@ function LoginPage() {
                     ></input>
                     <button type="submit">Login</button>
                 </form>
-                {isError && <p className="error-text">{isError.msg}</p>}
+                {Object.keys(error).length > 0 && (
+                    <p className="error-text">{error.msg}</p>
+                )}
             </div>
         </section>
     );
