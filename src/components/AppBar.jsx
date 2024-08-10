@@ -1,7 +1,11 @@
 import { Link } from "react-router-dom";
 import "../styles/AppBar.css";
+import { useContext } from "react";
+import { UserContext } from "../UserContext";
 
 function AppBar() {
+    const user = useContext(UserContext).user;
+
     return (
         <nav>
             <div className="buttons-container">
@@ -9,10 +13,18 @@ function AppBar() {
                     Logo
                 </Link>
                 <div>
-                    <Link className="nav-button">Create</Link>
-                    <Link className="nav-button" to="/logout">
-                        Logout
-                    </Link>
+                    {user ? (
+                        <>
+                            <Link className="nav-button">Create</Link>
+                            <Link className="nav-button" to="/logout">
+                                Logout
+                            </Link>
+                        </>
+                    ) : (
+                        <Link className="nav-button" to="/login">
+                            Login
+                        </Link>
+                    )}
                 </div>
             </div>
         </nav>

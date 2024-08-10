@@ -3,6 +3,7 @@ import "../styles/LoginPage.css";
 import { getAllUsers } from "../api";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../UserContext";
+import AppBar from "../components/AppBar";
 
 function LoginPage() {
     const [usernameInput, setUsernameInput] = useState("");
@@ -41,25 +42,28 @@ function LoginPage() {
     }
 
     return (
-        <section className="page-container">
-            <div className="login-container">
-                <h1>Login</h1>
-                <form className="login-form" onSubmit={handleSubmit}>
-                    <input
-                        id="username-input"
-                        name="username-input"
-                        placeholder="Username"
-                        value={usernameInput}
-                        onChange={handleChange}
-                        autoComplete="off"
-                    ></input>
-                    <button type="submit">Login</button>
-                </form>
-                {Object.keys(error).length > 0 && (
-                    <p className="error-text">{error.msg}</p>
-                )}
-            </div>
-        </section>
+        <>
+            <AppBar />
+            <section className="page-container">
+                <div className="login-container">
+                    <h1>Login</h1>
+                    <form className="login-form" onSubmit={handleSubmit}>
+                        <input
+                            id="username-input"
+                            name="username-input"
+                            placeholder="Username"
+                            value={usernameInput}
+                            onChange={handleChange}
+                            autoComplete="off"
+                        ></input>
+                        <button type="submit">Login</button>
+                    </form>
+                    {Object.keys(error).length > 0 && (
+                        <p className="error-text">{error.msg}</p>
+                    )}
+                </div>
+            </section>
+        </>
     );
 }
 

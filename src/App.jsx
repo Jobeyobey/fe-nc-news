@@ -15,7 +15,6 @@ function App() {
     return (
         <>
             <UserContext.Provider value={user}>
-                <AppBar />
                 <Routes>
                     <Route path="/logout" element={<LogoutPage />} />
                     <Route path="/login" element={<LoginPage />} />
