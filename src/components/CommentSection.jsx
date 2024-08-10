@@ -62,13 +62,17 @@ function CommentSection({ articleId, commentCount }) {
 
     return (
         <section className="comment-section">
-            {commentCount === 0 ? (
-                <h2>No Comments</h2>
-            ) : isLoading ? (
+            {isLoading ? (
                 <h2>Loading...</h2>
             ) : (
                 <>
-                    <h2 className="comment-section-title">Comments</h2>
+                    {commentCount > 1 ? (
+                        <h2 className="comment-section-title">Comments</h2>
+                    ) : (
+                        <h2 className="comment-section-title">
+                            Be the first to comment!
+                        </h2>
+                    )}
                     <div className="comment-container">
                         <form
                             id="comment-form"
@@ -95,6 +99,10 @@ function CommentSection({ articleId, commentCount }) {
                             )}
                         </form>
                     </div>
+                </>
+            )}
+            {commentCount === 0 && (
+                <>
                     {commentElements}
                     <PaginationButtons
                         totalCount={commentCount}
