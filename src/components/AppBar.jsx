@@ -15,7 +15,9 @@ function AppBar() {
                 <div>
                     {user ? (
                         <>
-                            <Link className="nav-button">Create</Link>
+                            <Link className="nav-button" to="/article/post">
+                                Create
+                            </Link>
                             <Link className="nav-button" to="/logout">
                                 Logout
                             </Link>

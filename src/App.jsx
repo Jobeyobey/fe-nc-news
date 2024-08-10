@@ -8,6 +8,7 @@ import LogoutPage from "./pages/LogoutPage";
 import NoEndpointPage from "./pages/NoEndpointPage";
 import { useContext } from "react";
 import { UserContext } from "./UserContext";
+import PostArticlePage from "./pages/PostArticlePage";
 
 function App() {
     const user = useContext(UserContext);
@@ -23,6 +24,7 @@ function App() {
                         path="/article/:article-id"
                         element={<ArticlePage />}
                     />
+                    <Route path="/article/post" element={<PostArticlePage />} />
                     <Route path="*" element={<NoEndpointPage />} />
                 </Routes>
             </UserContext.Provider>
