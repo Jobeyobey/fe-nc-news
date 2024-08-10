@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { deleteCommentById } from "../api";
 import { dateToString } from "../utils";
+import { UserContext } from "../UserContext";
 
 function Comment({ commentId, author, createdAt, body, setComments }) {
     const [isDeleting, setIsDeleting] = useState(false);
@@ -44,8 +45,7 @@ function Comment({ commentId, author, createdAt, body, setComments }) {
             <div className="comment-top">
                 <p>{author}</p>
                 <p>{dateString}</p>
-                {author !==
-                localStorage.getItem("username") ? null : isDeleting ? (
+                {author !== useContext(UserContext).user ? null : isDeleting ? (
                     <button disabled>Deleting...</button>
                 ) : (
                     author !== "[Deleted]" && (

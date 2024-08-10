@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "../styles/LoginPage.css";
 import { getAllUsers } from "../api";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../UserContext";
 
 function LoginPage() {
     const [usernameInput, setUsernameInput] = useState("");
@@ -10,9 +11,10 @@ function LoginPage() {
     const [successfulLogin, setSuccessfulLogin] = useState(false);
 
     const navigate = useNavigate();
+    const user = useContext(UserContext);
 
     useEffect(() => {
-        if (localStorage.getItem("username")) {
+        if (user.user) {
             navigate("/");
         }
 
@@ -31,6 +33,7 @@ function LoginPage() {
         const inputName = e.target["username-input"].value;
         if (users.find((user) => user.username === inputName)) {
             localStorage.setItem("username", inputName);
+            user.setUser(inputName);
             setSuccessfulLogin(true);
         } else {
             setError({ msg: "User does not exist. Test Account: grumpy19" });
