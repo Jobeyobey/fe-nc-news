@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { getCommentsByArticleId, postCommentToArticle } from "../api";
 import Comment from "../components/Comment.jsx";
 import PaginationButtons from "./PaginationButtons.jsx";
+import { UserContext } from "../UserContext.js";
 
 function CommentSection({ articleId, commentCount }) {
     const [isLoading, setIsLoading] = useState(false);
@@ -10,6 +11,8 @@ function CommentSection({ articleId, commentCount }) {
     const [newCommentBody, setNewCommentBody] = useState("");
     const [isPostingComment, setIsPostingComment] = useState(false);
     const [error, setError] = useState({});
+
+    const user = useContext(UserContext).user;
 
     useEffect(() => {
         setIsLoading(true);
@@ -41,7 +44,7 @@ function CommentSection({ articleId, commentCount }) {
         setError({});
         if (newCommentBody === "") {
             setError({ msg: "Please write a comment before submitting" });
-        } else {
+        } else if (user) {
             setIsPostingComment(true);
             postCommentToArticle(articleId, newCommentBody)
                 .then((newComment) => {
@@ -57,6 +60,8 @@ function CommentSection({ articleId, commentCount }) {
                     setIsPostingComment(false);
                 });
             setNewCommentBody("");
+        } else {
+            setError({ msg: "You must be logged in to comment." });
         }
     }
 
@@ -79,11 +84,12 @@ function CommentSection({ articleId, commentCount }) {
                             className="comment-form"
                             onSubmit={handleSubmit}
                         >
-                            <label>Add a comment</label>
+                            <label>Log in to comment</label>
                             <textarea
                                 name="comment-body"
                                 id="comment-body"
                                 placeholder="Comment here..."
+                                disabled={user ? false : true}
                                 value={newCommentBody}
                                 onChange={handleCommentBodyChange}
                             />
@@ -92,7 +98,12 @@ function CommentSection({ articleId, commentCount }) {
                                     Submitting...
                                 </button>
                             ) : (
-                                <button type="submit">Submit</button>
+                                <button
+                                    type="submit"
+                                    disabled={user ? false : true}
+                                >
+                                    Submit
+                                </button>
                             )}
                             {Object.keys(error).length > 0 && (
                                 <p className="error-text">{error.msg}</p>
