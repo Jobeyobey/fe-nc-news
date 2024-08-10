@@ -3,7 +3,7 @@ import "../styles/HomePage.css";
 import { getAllTopics, getAllUsers, getArticles } from "../api";
 import Article from "../components/Article";
 import PaginationButtons from "../components/PaginationButtons";
-import { useSearchParams } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { prepareSearchParams } from "../utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -18,6 +18,7 @@ function HomePage() {
     const [isLoading, setIsLoading] = useState(true);
     const [topics, setTopics] = useState([]);
     const [isOrderedDesc, setIsOrderedDesc] = useState(true);
+    const navigate = useNavigate();
 
     useEffect(() => {
         setIsLoading(true);
@@ -29,10 +30,18 @@ function HomePage() {
             searchParams.get("topic"),
             searchParams.get("sort_by"),
             searchParams.get("order")
-        ).then((response) => {
-            setArticles(response);
-            setIsLoading(false);
-        });
+        )
+            .then((response) => {
+                setArticles(response);
+                setIsLoading(false);
+            })
+            .catch((err) => {
+                if (err.response.data.msg === "topic not found") {
+                    navigate("/404?error=topic-not-found");
+                } else {
+                    navigate("/404");
+                }
+            });
     }, [articlesPage, searchParams, isOrderedDesc]);
 
     let topicOptions = [];
