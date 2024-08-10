@@ -101,7 +101,7 @@ function CommentSection({ articleId, commentCount }) {
                     </div>
                 </>
             )}
-            {commentCount === 0 && (
+            {commentCount > 0 && (
                 <>
                     {commentElements}
                     <PaginationButtons
