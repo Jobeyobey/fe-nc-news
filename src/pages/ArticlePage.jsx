@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { getArticleById } from "../api";
 import "../styles/ArticlePage.css";
 import { dateToString } from "../utils";
@@ -9,16 +9,21 @@ import Votes from "../components/Votes";
 function ArticlePage() {
     const [article, setArticle] = useState({});
     const [isLoading, setIsLoading] = useState(true);
+    const navigate = useNavigate();
 
     const params = useParams();
     const date = dateToString(article.created_at);
 
     useEffect(() => {
         setIsLoading(true);
-        getArticleById(params["article-id"]).then((response) => {
-            setArticle(response);
-            setIsLoading(false);
-        });
+        getArticleById(params["article-id"])
+            .then((response) => {
+                setArticle(response);
+                setIsLoading(false);
+            })
+            .catch((err) => {
+                navigate("/404?error=article-not-found");
+            });
     }, []);
 
     return (

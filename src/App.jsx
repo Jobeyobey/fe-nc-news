@@ -5,6 +5,7 @@ import "./styles/App.css";
 import ArticlePage from "./pages/ArticlePage";
 import LoginPage from "./pages/LoginPage";
 import LogoutPage from "./pages/LogoutPage";
+import NoEndpointPage from "./pages/NoEndpointPage";
 
 function App() {
     return (
@@ -15,6 +16,7 @@ function App() {
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/" element={<HomePage />} />
                 <Route path="/article/:article-id" element={<ArticlePage />} />
+                <Route path="*" element={<NoEndpointPage />} />
             </Routes>
         </>
     );
