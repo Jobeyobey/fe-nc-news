@@ -1,6 +1,7 @@
 import axios from "axios";
 
-axios.defaults.baseURL = "https://be-nc-news-q2go.onrender.com/api/";
+const API = "https://be-nc-news-q2go.onrender.com/api/";
+axios.defaults.baseURL = API;
 
 export function getAllUsers() {
     return axios.get("users").then(({ data }) => {
