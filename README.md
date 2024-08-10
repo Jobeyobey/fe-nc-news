@@ -30,13 +30,17 @@ If you want to host your own version, [follow the instructions to set up the bac
 
 [Fork](https://github.com/Jobeyobey/fe-nc-news/fork) this repo to your own account, or clone this repo to your machine.
 
-`$ git clone https://github.com/Jobeyobey/fe-nc-news.git`
+```
+$ git clone https://github.com/Jobeyobey/fe-nc-news.git
+```
 
 ### Step Two: Install dependencies
 
 Ensure you are in the project directory, and then install dependencies.
 
-`$ npm install`
+```
+$ npm install
+```
 
 ### Step Three (Optional): Connect to your API
 
@@ -46,7 +50,9 @@ If you have hosted your own API using the back-end repo, copy and paste the URL 
 
 To run the server, when in the root project directory, simply type the following in your terminal!
 
-`$ npm run dev`
+```
+$ npm run dev
+```
 
 Within your terminal window, you should be provided with a link to the locally hosted website.
 
