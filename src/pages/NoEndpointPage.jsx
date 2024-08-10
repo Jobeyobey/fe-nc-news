@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useSearchParams } from "react-router-dom";
+import AppBar from "../components/AppBar";
 
 function NoEndpointPage() {
     const [params, setParams] = useSearchParams();
@@ -22,11 +23,14 @@ function NoEndpointPage() {
     }, []);
 
     return (
-        <div className="page-container">
-            <h1>Error {error.status}</h1>
-            <p>{error.msg}</p>
-            <Link to="/">Let's get you home</Link>
-        </div>
+        <>
+            <AppBar />
+            <div className="page-container">
+                <h1>Error {error.status}</h1>
+                <p>{error.msg}</p>
+                <Link to="/">Let's get you home</Link>
+            </div>
+        </>
     );
 }
 

@@ -1,16 +1,17 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { deleteCommentById } from "../api";
 import { dateToString } from "../utils";
+import { UserContext } from "../UserContext";
 
 function Comment({ commentId, author, createdAt, body, setComments }) {
     const [isDeleting, setIsDeleting] = useState(false);
-    const [isError, setIsError] = useState(false);
+    const [error, setError] = useState({});
     const dateString = dateToString(createdAt);
 
     function handleClick(e) {
         e.preventDefault();
         const clickedButtonId = e.target.id;
-        setIsError(false);
+        setError({});
         setIsDeleting(true);
         deleteCommentById(clickedButtonId)
             .then(() => {
@@ -26,11 +27,11 @@ function Comment({ commentId, author, createdAt, body, setComments }) {
                     };
                     return [...currComments];
                 });
-                setIsDeleting(() => false);
+                setIsDeleting(false);
             })
             .catch(() => {
                 setIsDeleting(false);
-                setIsError({
+                setError({
                     msg: "Unable to delete comment. Check your internet connection.",
                 });
             });
@@ -38,12 +39,13 @@ function Comment({ commentId, author, createdAt, body, setComments }) {
 
     return (
         <div className="comment-container">
-            {isError && <p className="error-text">{isError.msg}</p>}
+            {Object.keys(error).length > 0 && (
+                <p className="error-text">{error.msg}</p>
+            )}
             <div className="comment-top">
                 <p>{author}</p>
                 <p>{dateString}</p>
-                {author !==
-                localStorage.getItem("username") ? null : isDeleting ? (
+                {author !== useContext(UserContext).user ? null : isDeleting ? (
                     <button disabled>Deleting...</button>
                 ) : (
                     author !== "[Deleted]" && (

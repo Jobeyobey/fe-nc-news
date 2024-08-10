@@ -10,6 +10,7 @@ import {
     faArrowUpShortWide,
     faArrowDownShortWide,
 } from "@fortawesome/free-solid-svg-icons";
+import AppBar from "../components/AppBar";
 
 function HomePage() {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -103,60 +104,65 @@ function HomePage() {
     }
 
     return (
-        <section className="page-container">
-            {isLoading ? (
-                <h1>Loading...</h1>
-            ) : (
-                <>
-                    <div className="search-options">
-                        <select
-                            name="topics"
-                            id="topics"
-                            className="query-select"
-                            onChange={handleTopicChange}
-                            value={searchParams.get("topic") || "all-topics"}
-                        >
-                            <option value="all-topics">All Topics</option>
-                            {topicOptions}
-                        </select>
-                        <select
-                            name="sort-by"
-                            id="sort-by"
-                            className="query-select"
-                            onChange={handleSortChange}
-                            value={searchParams.get("sort_by") || "date"}
-                        >
-                            <option value="date">Date</option>
-                            <option value="title">Title</option>
-                            <option value="topic">Topic</option>
-                            <option value="author">Author</option>
-                            <option value="votes">Popularity</option>
-                            <option value="comment_count">Comments</option>
-                        </select>
-                        {isOrderedDesc ? (
-                            <FontAwesomeIcon
-                                className="order-icon"
-                                icon={faArrowDownShortWide}
-                                onClick={handleOrderChange}
-                            />
-                        ) : (
-                            <FontAwesomeIcon
-                                className="order-icon"
-                                icon={faArrowUpShortWide}
-                                onClick={handleOrderChange}
-                            />
-                        )}
-                    </div>
+        <>
+            <AppBar />
+            <section className="page-container">
+                {isLoading ? (
+                    <h1>Loading...</h1>
+                ) : (
+                    <>
+                        <div className="search-options">
+                            <select
+                                name="topics"
+                                id="topics"
+                                className="query-select"
+                                onChange={handleTopicChange}
+                                value={
+                                    searchParams.get("topic") || "all-topics"
+                                }
+                            >
+                                <option value="all-topics">All Topics</option>
+                                {topicOptions}
+                            </select>
+                            <select
+                                name="sort-by"
+                                id="sort-by"
+                                className="query-select"
+                                onChange={handleSortChange}
+                                value={searchParams.get("sort_by") || "date"}
+                            >
+                                <option value="date">Date</option>
+                                <option value="title">Title</option>
+                                <option value="topic">Topic</option>
+                                <option value="author">Author</option>
+                                <option value="votes">Popularity</option>
+                                <option value="comment_count">Comments</option>
+                            </select>
+                            {isOrderedDesc ? (
+                                <FontAwesomeIcon
+                                    className="order-icon"
+                                    icon={faArrowDownShortWide}
+                                    onClick={handleOrderChange}
+                                />
+                            ) : (
+                                <FontAwesomeIcon
+                                    className="order-icon"
+                                    icon={faArrowUpShortWide}
+                                    onClick={handleOrderChange}
+                                />
+                            )}
+                        </div>
 
-                    {articleElements}
-                    <PaginationButtons
-                        totalCount={articles.article_count}
-                        currPage={articlesPage}
-                        setCurrPage={setArticlesPage}
-                    />
-                </>
-            )}
-        </section>
+                        {articleElements}
+                        <PaginationButtons
+                            totalCount={articles.article_count}
+                            currPage={articlesPage}
+                            setCurrPage={setArticlesPage}
+                        />
+                    </>
+                )}
+            </section>
+        </>
     );
 }
 

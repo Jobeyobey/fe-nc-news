@@ -1,18 +1,21 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "../styles/LoginPage.css";
 import { getAllUsers } from "../api";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../UserContext";
+import AppBar from "../components/AppBar";
 
 function LoginPage() {
     const [usernameInput, setUsernameInput] = useState("");
     const [users, setUsers] = useState([]);
-    const [isError, setIsError] = useState(false);
+    const [error, setError] = useState({});
     const [successfulLogin, setSuccessfulLogin] = useState(false);
 
     const navigate = useNavigate();
+    const user = useContext(UserContext);
 
     useEffect(() => {
-        if (localStorage.getItem("username")) {
+        if (user.user) {
             navigate("/");
         }
 
@@ -27,34 +30,40 @@ function LoginPage() {
 
     function handleSubmit(e) {
         e.preventDefault();
-        setIsError(false);
+        setError({});
         const inputName = e.target["username-input"].value;
         if (users.find((user) => user.username === inputName)) {
             localStorage.setItem("username", inputName);
-            setSuccessfulLogin(() => true);
+            user.setUser(inputName);
+            setSuccessfulLogin(true);
         } else {
-            setIsError({ msg: "User does not exist. Test Account: grumpy19" });
+            setError({ msg: "User does not exist. Test Account: grumpy19" });
         }
     }
 
     return (
-        <section className="page-container">
-            <div className="login-container">
-                <h1>Login</h1>
-                <form className="login-form" onSubmit={handleSubmit}>
-                    <input
-                        id="username-input"
-                        name="username-input"
-                        placeholder="Username"
-                        value={usernameInput}
-                        onChange={handleChange}
-                        autoComplete="off"
-                    ></input>
-                    <button type="submit">Login</button>
-                </form>
-                {isError && <p className="error-text">{isError.msg}</p>}
-            </div>
-        </section>
+        <>
+            <AppBar />
+            <section className="page-container">
+                <div className="login-container">
+                    <h1>Login</h1>
+                    <form className="login-form" onSubmit={handleSubmit}>
+                        <input
+                            id="username-input"
+                            name="username-input"
+                            placeholder="Username"
+                            value={usernameInput}
+                            onChange={handleChange}
+                            autoComplete="off"
+                        ></input>
+                        <button type="submit">Login</button>
+                    </form>
+                    {Object.keys(error).length > 0 && (
+                        <p className="error-text">{error.msg}</p>
+                    )}
+                </div>
+            </section>
+        </>
     );
 }
 

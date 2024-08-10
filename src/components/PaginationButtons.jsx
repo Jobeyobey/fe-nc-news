@@ -20,9 +20,11 @@ function PaginationButtons({ totalCount, currPage, setCurrPage }) {
                     Back
                 </button>
             )}
-            <p>
-                Page {currPage} of {maxPageNum}
-            </p>
+            {maxPageNum > 1 && (
+                <p>
+                    Page {currPage} of {maxPageNum}
+                </p>
+            )}
             {currPage < maxPageNum && (
                 <button id="page-next" onClick={handleClick}>
                     Next
