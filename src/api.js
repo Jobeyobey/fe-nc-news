@@ -49,7 +49,7 @@ export function voteArticleById(articleId, vote) {
 export function postCommentToArticle(articleId, body) {
     return axios
         .post(`articles/${articleId}/comments`, {
-            username: "grumpy19", // Hardcoded in user until a login page is created after core tasks
+            username: localStorage.getItem("username"),
             body,
         })
         .then(({ data }) => {
