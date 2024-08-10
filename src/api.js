@@ -15,6 +15,12 @@ export function getAllTopics() {
     });
 }
 
+export function postTopic(slug, description) {
+    return axios.post("topics", { slug, description }).then(() => {
+        return "Topic posted";
+    });
+}
+
 export function getArticles(page, topic, sort_by, order) {
     if (topic === "all-topics") topic = undefined;
     return axios
@@ -28,6 +34,14 @@ export function getArticleById(articleId) {
     return axios.get(`articles/${articleId}`).then(({ data }) => {
         return data.article;
     });
+}
+
+export function postArticle({ title, topic, author, body, article_img_url }) {
+    return axios
+        .post(`articles`, { title, topic, author, body, article_img_url })
+        .then(({ data }) => {
+            return data.article;
+        });
 }
 
 export function getCommentsByArticleId(articleId, page) {
