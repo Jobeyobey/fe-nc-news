@@ -6,9 +6,10 @@ import { UserContext } from "../UserContext";
 function Comment({ commentId, author, createdAt, body, setComments }) {
     const [isDeleting, setIsDeleting] = useState(false);
     const [error, setError] = useState({});
+
     const dateString = dateToString(createdAt);
 
-    function handleClick(e) {
+    function handleDelete(e) {
         e.preventDefault();
         const clickedButtonId = e.target.id;
         setError({});
@@ -49,7 +50,7 @@ function Comment({ commentId, author, createdAt, body, setComments }) {
                     <button disabled>Deleting...</button>
                 ) : (
                     author !== "[Deleted]" && (
-                        <button id={commentId} onClick={handleClick}>
+                        <button id={commentId} onClick={handleDelete}>
                             Delete
                         </button>
                     )
