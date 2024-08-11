@@ -4,6 +4,7 @@ import { getAllTopics, postArticle, postTopic } from "../api";
 import "../styles/PostArticlePage.css";
 import { UserContext } from "../UserContext";
 import { useNavigate } from "react-router-dom";
+import { checkIsImgURL, checkValidURL } from "../utils";
 
 function PostArticlePage() {
     const [topics, setTopics] = useState([]);
@@ -75,13 +76,50 @@ function PostArticlePage() {
         e.preventDefault();
         setError({});
 
-        // Ensure all fields have input
+        // Ensure title has an input
         const isTitle = titleInput !== "";
-        const isSelectTopic = selectTopicInput !== "select-a-topic";
-        const isBody = bodyInput !== "";
-        const isImg = imgURLInput !== "";
+        if (!isTitle)
+            setError((currError) => {
+                return {
+                    ...currError,
+                    titleError: "Please provide an article title.",
+                };
+            });
 
-        // If creating a new topic, ensure slug and description are filled
+        // Ensure topic has an input
+        const isSelectTopic = selectTopicInput !== "select-a-topic";
+        if (!isSelectTopic) {
+            setError((currError) => {
+                return {
+                    ...currError,
+                    selectTopicError: "Please select an article topic.",
+                };
+            });
+        }
+
+        // Ensure body has an input
+        const isBody = bodyInput !== "";
+        if (!isBody) {
+            setError((currError) => {
+                return {
+                    ...currError,
+                    bodyError: "Please provide an article body.",
+                };
+            });
+        }
+
+        // Ensure URL has an input
+        let isImg = imgURLInput !== "";
+        if (!isImg) {
+            setError((currError) => {
+                return {
+                    ...currError,
+                    imgError: "Please provide an article image.",
+                };
+            });
+        }
+
+        // If creating a new topic, ensure slug and description have input
         let isNewTopic = true;
         if (selectTopicInput === "add-new-topic") {
             if (newTopicInput.slug !== "" && newTopicInput.description !== "") {
@@ -90,77 +128,55 @@ function PostArticlePage() {
                 isNewTopic = false;
             }
         }
-
-        const author = user;
-        const articleInfo = {
-            title: titleInput,
-            author,
-            body: bodyInput,
-            article_img_url: imgURLInput,
-        };
+        if (!isNewTopic) {
+            setError((currError) => {
+                return {
+                    ...currError,
+                    newTopicError:
+                        "Please provide a relevant topic name and description.",
+                };
+            });
+        }
 
         if (isTitle && isSelectTopic && isNewTopic && isBody && isImg) {
-            if (selectTopicInput !== "add-new-topic") {
-                articleInfo.topic = selectTopicInput;
-                postArticle(articleInfo).then(() => {
-                    navigate("/");
-                });
-            } else {
-                articleInfo.topic = newTopicInput.slug;
-                postTopic(newTopicInput.slug, newTopicInput.description).then(
-                    () => {
+            checkIsImgURL(imgURLInput).then((isValidURL) => {
+                if (isValidURL) {
+                    const author = user;
+                    const articleInfo = {
+                        title: titleInput,
+                        author,
+                        body: bodyInput,
+                        article_img_url: imgURLInput,
+                    };
+
+                    // Check whether a new topic needs to be created before posting
+                    if (selectTopicInput === "add-new-topic") {
+                        postTopic(
+                            newTopicInput.slug,
+                            newTopicInput.description
+                        ).then(() => {
+                            articleInfo.topic = newTopicInput.slug;
+                            postArticle(articleInfo).then(() => {
+                                navigate("/");
+                            });
+                        });
+                    } else {
+                        articleInfo.topic = selectTopicInput;
                         postArticle(articleInfo).then(() => {
                             navigate("/");
                         });
                     }
-                );
-            }
-        } else {
-            if (!isTitle) {
-                setError((currError) => {
-                    return {
-                        ...currError,
-                        titleError: "Please provide an article title.",
-                    };
-                });
-            }
-            if (!isSelectTopic) {
-                setError((currError) => {
-                    return {
-                        ...currError,
-                        selectTopicError: "Please select an article topic.",
-                    };
-                });
-            }
-            if (!isNewTopic) {
-                setError((currError) => {
-                    return {
-                        ...currError,
-                        newTopicError:
-                            "Please provide a relevant topic name and description.",
-                    };
-                });
-            }
-            if (!isBody) {
-                setError((currError) => {
-                    return {
-                        ...currError,
-                        bodyError: "Please provide an article body.",
-                    };
-                });
-            }
-            if (!isImg) {
-                setError((currError) => {
-                    return {
-                        ...currError,
-                        imgError: "Please provide an article image.",
-                    };
-                });
-            }
+                } else {
+                    setError((currError) => {
+                        return {
+                            ...currError,
+                            imgError: "Provided image URL is not valid",
+                        };
+                    });
+                }
+            });
         }
     }
-
-    console.log(error);
 
     return (
         <>
