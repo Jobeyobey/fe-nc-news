@@ -8,18 +8,18 @@ function Comment({ commentId, author, createdAt, body, setComments }) {
     const [error, setError] = useState({});
 
     const dateString = dateToString(createdAt);
+    const user = useContext(UserContext).user;
 
     function handleDelete(e) {
         e.preventDefault();
-        const clickedButtonId = e.target.id;
+        const commentId = e.target.id;
         setError({});
         setIsDeleting(true);
-        deleteCommentById(clickedButtonId)
+        deleteCommentById(commentId)
             .then(() => {
                 setComments((currComments) => {
                     const deleteIndex = currComments.findIndex(
-                        (comment) =>
-                            comment.comment_id === parseInt(clickedButtonId)
+                        (comment) => comment.comment_id === parseInt(commentId)
                     );
                     currComments[deleteIndex] = {
                         ...currComments[deleteIndex],
@@ -46,7 +46,7 @@ function Comment({ commentId, author, createdAt, body, setComments }) {
             <div className="comment-top">
                 <p>{author}</p>
                 <p>{dateString}</p>
-                {author !== useContext(UserContext).user ? null : isDeleting ? (
+                {author !== user ? null : isDeleting ? (
                     <button disabled>Deleting...</button>
                 ) : (
                     author !== "[Deleted]" && (

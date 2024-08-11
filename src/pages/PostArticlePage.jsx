@@ -4,7 +4,7 @@ import { getAllTopics, postArticle, postTopic } from "../api";
 import "../styles/PostArticlePage.css";
 import { UserContext } from "../UserContext";
 import { useNavigate } from "react-router-dom";
-import { checkIsImgURL, checkValidURL } from "../utils";
+import { checkIsImgURL } from "../utils";
 
 function PostArticlePage() {
     const [topics, setTopics] = useState([]);
