@@ -69,13 +69,12 @@ function ArticlePage() {
                     </>
                 ) : (
                     <>
-                        <Link to="/">← Home</Link>
                         <img
                             src={article.article_img_url}
                             className="article-page-hero-image"
                         />
                         <div className="article-page-info">
-                            <p>{article.topic}</p>
+                            <p className="article-topic">{article.topic}</p>
                             <p>{date}</p>
                         </div>
                         <h1 className="article-page-title">{article.title}</h1>
@@ -89,12 +88,15 @@ function ArticlePage() {
                         />
 
                         {article.author !== user ? null : isDeleting ? (
-                            <button disabled>Deleting...</button>
+                            <button className="delete-btn" disabled>
+                                Deleting...
+                            </button>
                         ) : (
                             article.author !== "[Deleted]" && (
                                 <button
                                     id={article.article_id}
                                     onClick={handleDelete}
+                                    className="delete-btn"
                                 >
                                     Delete
                                 </button>
@@ -104,7 +106,7 @@ function ArticlePage() {
                             <p className="error-text">{error.msg}</p>
                         )}
 
-                        <p>{article.body}</p>
+                        <p className="article-page-body">{article.body}</p>
                         <CommentSection
                             articleId={article.article_id}
                             commentCount={article.comment_count}

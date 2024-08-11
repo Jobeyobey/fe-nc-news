@@ -1,32 +1,57 @@
+.home-link {
+    background: steelblue;
+    color: white;
+    border-radius: 5px;
+}
+
 .article-page-hero-image {
     margin: 1rem 0;
     width: 100%;
-    border-radius: 15px;
+    border-radius: 5px;
 }
 
 .article-page-info {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    color: #606060;
 }
 
 .article-page-title {
     margin: 1rem 0 0.2rem 0;
 }
 
-.article-page-author {
-    margin: 0 0 1rem 0;
+.article-page-body {
+    margin-top: 1.5rem;
 }
 
 .votes-container {
     display: flex;
+    margin: 1.5rem 0 0rem 0.5rem;
 }
 
 .vote-text {
     margin: 0rem 1.5rem;
+    font-weight: 500;
+}
+
+.vote-btn-element {
+    scale: 2;
+    background: none;
+    border: none;
+    transition-duration: 0.1s;
+}
+
+.vote-btn-element:active {
+    scale: 1.8;
+}
+
+.vote-btn-element:hover {
+    filter: brightness(1.1);
 }
 
 .vote-btn {
-    scale: 1.5;
+    scale: 1;
     cursor: pointer;
     pointer-events: none;
 }
@@ -40,7 +65,7 @@
 }
 
 .vote-down {
-    color: red;
+    color: rgb(203, 33, 33);
 }
 
 .vote-disabled:hover {
@@ -53,9 +78,7 @@
 
 .comment-section {
     margin-top: 2rem;
-    padding: 1.5rem;
-    background: #efefef;
-    border-radius: 10px;
+    border-radius: 5px;
 }
 
 .comment-section-title {
@@ -63,10 +86,16 @@
 }
 
 .comment-container {
-    margin-bottom: 1.5rem;
+    margin: 1rem 0;
+    background: #fafafa;
+    border: 1px solid #efefef;
+    border-radius: 5px;
+    box-shadow: 0 2px 0px #d5d5d5;
     padding: 1rem;
-    background: white;
-    border-radius: 10px;
+}
+
+.post-comment-label {
+    font-weight: 500;
 }
 
 .comment-form {
@@ -77,6 +106,15 @@
 
 .comment-top {
     display: flex;
+    justify-content: space-between;
     gap: 1rem;
     margin-bottom: 1rem;
+}
+
+.comment-author {
+    font-weight: 500;
+}
+
+.comment-date {
+    color: #606060;
 }

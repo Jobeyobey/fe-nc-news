@@ -17,6 +17,15 @@
     height: 2rem;
     color: steelblue;
     cursor: pointer;
+    transition-duration: 0.1s;
+}
+
+order-icon:active {
+    scale: 0.98;
+}
+
+.order-icon:hover {
+    filter: brightness(1.1);
 }
 
 .list-article-container {

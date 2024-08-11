@@ -3,6 +3,8 @@ import { getCommentsByArticleId, postCommentToArticle } from "../api";
 import Comment from "../components/Comment.jsx";
 import PaginationButtons from "./PaginationButtons.jsx";
 import { UserContext } from "../UserContext.js";
+import Lottie from "lottie-react";
+import loadingAnimation from "../../images/Loading.json";
 
 function CommentSection({ articleId, commentCount }) {
     const [isLoading, setIsLoading] = useState(false);
@@ -69,7 +71,10 @@ function CommentSection({ articleId, commentCount }) {
     return (
         <section className="comment-section">
             {isLoading ? (
-                <h2>Loading...</h2>
+                <>
+                    <h1 className="loading-title">Loading your content...</h1>
+                    <Lottie animationData={loadingAnimation} loop={true} />
+                </>
             ) : (
                 <>
                     {comments.length > 0 ? (
@@ -86,9 +91,13 @@ function CommentSection({ articleId, commentCount }) {
                             onSubmit={handleSubmit}
                         >
                             {user ? (
-                                <label>Add a comment</label>
+                                <label className="post-comment-label">
+                                    Add to the conversation
+                                </label>
                             ) : (
-                                <label>Log in to comment</label>
+                                <label className="post-comment-label">
+                                    Log in to comment
+                                </label>
                             )}
                             <textarea
                                 name="comment-body"
@@ -105,6 +114,7 @@ function CommentSection({ articleId, commentCount }) {
                             ) : (
                                 <button
                                     type="submit"
+                                    className="submit-btn"
                                     disabled={user ? false : true}
                                 >
                                     Submit
@@ -120,11 +130,13 @@ function CommentSection({ articleId, commentCount }) {
             {comments.length > 0 && (
                 <>
                     {commentElements}
-                    <PaginationButtons
-                        totalCount={commentCount}
-                        currPage={commentsPage}
-                        setCurrPage={setCommentsPage}
-                    />
+                    {Math.ceil(commentCount / 10) > 1 && (
+                        <PaginationButtons
+                            totalCount={commentCount}
+                            currPage={commentsPage}
+                            setCurrPage={setCommentsPage}
+                        />
+                    )}
                 </>
             )}
         </section>
