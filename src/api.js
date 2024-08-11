@@ -60,6 +60,13 @@ export function voteArticleById(articleId, vote) {
         });
 }
 
+export function deleteArticleById(articleId) {
+    return axiosInstance.delete(`articles/${articleId}`).then((response) => {
+        console.log(response, "then");
+        return "Article deleted";
+    });
+}
+
 export function postCommentToArticle(articleId, body) {
     return axiosInstance
         .post(`articles/${articleId}/comments`, {

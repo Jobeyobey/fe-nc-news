@@ -49,7 +49,7 @@ function Votes({ votes, articleId }) {
                 setVoteTracker(votes);
                 voteArticleById(articleId, voteInc).catch(() => {
                     setError({
-                        msg: "Unable to vote - Check your internet connection",
+                        msg: "Unable to vote. Check your internet connection",
                     });
                     setVoteTracker(currVotes);
                     setVoteStatus(currVoteStatus);

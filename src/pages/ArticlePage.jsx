@@ -1,19 +1,24 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { getArticleById } from "../api";
+import { deleteArticleById, getArticleById } from "../api";
 import "../styles/ArticlePage.css";
 import { dateToString } from "../utils";
 import CommentSection from "../components/CommentSection";
 import Votes from "../components/Votes";
 import AppBar from "../components/AppBar";
+import { UserContext } from "../UserContext";
 
 function ArticlePage() {
     const [article, setArticle] = useState({});
     const [isLoading, setIsLoading] = useState(true);
+    const [isDeleting, setIsDeleting] = useState(false);
+    const [isDeleted, setIsDeleted] = useState(false);
+    const [error, setError] = useState({});
     const navigate = useNavigate();
 
     const params = useParams();
     const date = dateToString(article.created_at);
+    const user = useContext(UserContext).user;
 
     useEffect(() => {
         setIsLoading(true);
@@ -22,16 +27,38 @@ function ArticlePage() {
                 setArticle(response);
                 setIsLoading(false);
             })
-            .catch((err) => {
+            .catch(() => {
                 navigate("/404?error=article-not-found");
             });
     }, []);
+
+    function handleDelete(e) {
+        e.preventDefault();
+        const articleId = e.target.id;
+        setError({});
+        setIsDeleting(true);
+        deleteArticleById(articleId)
+            .then(() => {
+                setIsDeleted(true);
+            })
+            .catch(() => {
+                setIsDeleting(false);
+                setError({
+                    msg: "Unable to delete article. Check your internet connection.",
+                });
+            });
+    }
 
     return (
         <>
             <AppBar />
             <section className="page-container">
-                {isLoading ? (
+                {isDeleted ? (
+                    <>
+                        <h1>Your article has been successfully deleted</h1>
+                        <Link to="/">Home</Link>
+                    </>
+                ) : isLoading ? (
                     <h1>Loading...</h1>
                 ) : (
                     <>
@@ -52,6 +79,23 @@ function ArticlePage() {
                             votes={article.votes}
                             articleId={article.article_id}
                         />
+
+                        {article.author !== user ? null : isDeleting ? (
+                            <button disabled>Deleting...</button>
+                        ) : (
+                            article.author !== "[Deleted]" && (
+                                <button
+                                    id={article.article_id}
+                                    onClick={handleDelete}
+                                >
+                                    Delete
+                                </button>
+                            )
+                        )}
+                        {Object.keys(error).length > 0 && (
+                            <p className="error-text">{error.msg}</p>
+                        )}
+
                         <p>{article.body}</p>
                         <CommentSection
                             articleId={article.article_id}
