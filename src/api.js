@@ -1,23 +1,29 @@
 import axios from "axios";
 
 const API = "https://be-nc-news-q2go.onrender.com/api/";
-axios.defaults.baseURL = API;
+const axiosInstance = axios.create({ baseURL: API });
 
 export function getAllUsers() {
-    return axios.get("users").then(({ data }) => {
+    return axiosInstance.get("users").then(({ data }) => {
         return data.users;
     });
 }
 
 export function getAllTopics() {
-    return axios.get("topics").then(({ data }) => {
+    return axiosInstance.get("topics").then(({ data }) => {
         return data.topics;
+    });
+}
+
+export function postTopic(slug, description) {
+    return axiosInstance.post("topics", { slug, description }).then(() => {
+        return "Topic posted";
     });
 }
 
 export function getArticles(page, topic, sort_by, order) {
     if (topic === "all-topics") topic = undefined;
-    return axios
+    return axiosInstance
         .get("articles", { params: { page, topic, sort_by, order } })
         .then(({ data }) => {
             return data;
@@ -25,13 +31,21 @@ export function getArticles(page, topic, sort_by, order) {
 }
 
 export function getArticleById(articleId) {
-    return axios.get(`articles/${articleId}`).then(({ data }) => {
+    return axiosInstance.get(`articles/${articleId}`).then(({ data }) => {
         return data.article;
     });
 }
 
+export function postArticle({ title, topic, author, body, article_img_url }) {
+    return axiosInstance
+        .post(`articles`, { title, topic, author, body, article_img_url })
+        .then(({ data }) => {
+            return data.article;
+        });
+}
+
 export function getCommentsByArticleId(articleId, page) {
-    return axios
+    return axiosInstance
         .get(`articles/${articleId}/comments`, { params: { page } })
         .then(({ data }) => {
             return data.comments;
@@ -39,7 +53,7 @@ export function getCommentsByArticleId(articleId, page) {
 }
 
 export function voteArticleById(articleId, vote) {
-    return axios
+    return axiosInstance
         .patch(`articles/${articleId}`, { inc_votes: vote })
         .then(({ data }) => {
             return data.article;
@@ -47,7 +61,7 @@ export function voteArticleById(articleId, vote) {
 }
 
 export function postCommentToArticle(articleId, body) {
-    return axios
+    return axiosInstance
         .post(`articles/${articleId}/comments`, {
             username: localStorage.getItem("username"),
             body,
@@ -58,7 +72,7 @@ export function postCommentToArticle(articleId, body) {
 }
 
 export function deleteCommentById(commentId) {
-    return axios.delete(`comments/${commentId}`).then(() => {
+    return axiosInstance.delete(`comments/${commentId}`).then(() => {
         return "Deleted";
     });
 }
