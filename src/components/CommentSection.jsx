@@ -72,7 +72,7 @@ function CommentSection({ articleId, commentCount }) {
                 <h2>Loading...</h2>
             ) : (
                 <>
-                    {commentCount > 1 ? (
+                    {comments.length > 0 ? (
                         <h2 className="comment-section-title">Comments</h2>
                     ) : (
                         <h2 className="comment-section-title">
@@ -85,7 +85,11 @@ function CommentSection({ articleId, commentCount }) {
                             className="comment-form"
                             onSubmit={handleSubmit}
                         >
-                            <label>Log in to comment</label>
+                            {user ? (
+                                <label>Add a comment</label>
+                            ) : (
+                                <label>Log in to comment</label>
+                            )}
                             <textarea
                                 name="comment-body"
                                 id="comment-body"
@@ -113,7 +117,7 @@ function CommentSection({ articleId, commentCount }) {
                     </div>
                 </>
             )}
-            {commentCount > 0 && (
+            {comments.length > 0 && (
                 <>
                     {commentElements}
                     <PaginationButtons

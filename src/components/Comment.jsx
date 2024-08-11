@@ -10,7 +10,7 @@ function Comment({ commentId, author, createdAt, body, votes, setComments }) {
 
     const dateString = dateToString(createdAt);
     const user = useContext(UserContext).user;
-    console.log(votes);
+
     function handleDelete(e) {
         e.preventDefault();
         const commentId = e.target.id;
