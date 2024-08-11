@@ -6,7 +6,7 @@ import { UserContext } from "../UserContext";
 import AppBar from "../components/AppBar";
 
 function LoginPage() {
-    const [usernameInput, setUsernameInput] = useState("");
+    const [usernameInput, setUsernameInput] = useState("grumpy19");
     const [users, setUsers] = useState([]);
     const [error, setError] = useState({});
     const [successfulLogin, setSuccessfulLogin] = useState(false);
@@ -56,11 +56,41 @@ function LoginPage() {
                             onChange={handleChange}
                             autoComplete="off"
                         ></input>
-                        <button type="submit">Login</button>
+                        <button type="submit" className="login-btn">
+                            Login
+                        </button>
                     </form>
                     {Object.keys(error).length > 0 && (
                         <p className="error-text">{error.msg}</p>
                     )}
+                </div>
+                <div className="login-explanation">
+                    <p className="explanation-title">
+                        <strong>User Authentication</strong>
+                    </p>
+                    <p className="explanation-text">
+                        User authentication was outside of the scope of this
+                        project, however if you'd like to see a project where I
+                        did implement it, check out{" "}
+                        <span>
+                            <a
+                                href="https://github.com/Jobeyobey/the-boardgame-companion"
+                                target="_blank"
+                            >
+                                The Boardgame Companion
+                            </a>
+                        </span>
+                        !
+                    </p>
+                    <p className="user-list-title">Available users</p>
+                    <ul>
+                        <li>grumpy19</li>
+                        <li>tickle122</li>
+                        <li>happyamy2016</li>
+                        <li>cooljmessy</li>
+                        <li>weegembump</li>
+                        <li>jessjelly</li>
+                    </ul>
                 </div>
             </section>
         </>
