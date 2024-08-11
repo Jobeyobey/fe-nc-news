@@ -54,7 +54,10 @@ function ArticlePage() {
             <AppBar />
             <section className="page-container">
                 {isDeleted ? (
-                    <h1>Your article has been successfully deleted</h1>
+                    <>
+                        <h1>Your article has been successfully deleted</h1>
+                        <Link to="/">Home</Link>
+                    </>
                 ) : isLoading ? (
                     <h1>Loading...</h1>
                 ) : (
