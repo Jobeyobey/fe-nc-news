@@ -116,9 +116,51 @@ function PostArticlePage() {
                 );
             }
         } else {
-            setError({ msg: "Please fill in all parts of the form" });
+            if (!isTitle) {
+                setError((currError) => {
+                    return {
+                        ...currError,
+                        titleError: "Please provide an article title.",
+                    };
+                });
+            }
+            if (!isSelectTopic) {
+                setError((currError) => {
+                    return {
+                        ...currError,
+                        selectTopicError: "Please select an article topic.",
+                    };
+                });
+            }
+            if (!isNewTopic) {
+                setError((currError) => {
+                    return {
+                        ...currError,
+                        newTopicError:
+                            "Please provide a relevant topic name and description.",
+                    };
+                });
+            }
+            if (!isBody) {
+                setError((currError) => {
+                    return {
+                        ...currError,
+                        bodyError: "Please provide an article body.",
+                    };
+                });
+            }
+            if (!isImg) {
+                setError((currError) => {
+                    return {
+                        ...currError,
+                        imgError: "Please provide an article image.",
+                    };
+                });
+            }
         }
     }
+
+    console.log(error);
 
     return (
         <>
@@ -138,6 +180,9 @@ function PostArticlePage() {
                         onChange={handleTitleChange}
                         autoComplete="off"
                     ></input>
+                    {error.titleError && (
+                        <p className="error-text">{error.titleError}</p>
+                    )}
                     <select
                         name="topics"
                         id="topics"
@@ -149,6 +194,9 @@ function PostArticlePage() {
                         <option value="add-new-topic">Add new topic</option>
                         {topicOptions}
                     </select>
+                    {error.selectTopicError && (
+                        <p className="error-text">{error.selectTopicError}</p>
+                    )}
                     {selectTopicInput === "add-new-topic" && (
                         <>
                             <input
@@ -167,6 +215,11 @@ function PostArticlePage() {
                                 onChange={handleNewTopicDescriptionChange}
                                 autoComplete="off"
                             />
+                            {error.newTopicError && (
+                                <p className="error-text">
+                                    {error.newTopicError}
+                                </p>
+                            )}
                         </>
                     )}
                     <textarea
@@ -176,6 +229,9 @@ function PostArticlePage() {
                         onChange={handleBodyChange}
                         value={bodyInput}
                     />
+                    {error.bodyError && (
+                        <p className="error-text">{error.bodyError}</p>
+                    )}
                     <input
                         id="img-url-input"
                         name="img-url-input"
@@ -184,10 +240,10 @@ function PostArticlePage() {
                         onChange={handleURLInputChange}
                         autoComplete="off"
                     ></input>
-                    <button type="submit">Create Article</button>
-                    {error.msg !== "" && (
-                        <p className="error-text">{error.msg}</p>
+                    {error.imgError && (
+                        <p className="error-text">{error.imgError}</p>
                     )}
+                    <button type="submit">Create Article</button>
                 </form>
             </section>
             ;
