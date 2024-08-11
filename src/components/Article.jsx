@@ -14,23 +14,27 @@ function Article({
     const date = dateToString(createdAt);
 
     return (
-        <article className="list-article-container">
-            <img className="list-article-image" src={imgURL} />
-            <div className="list-article-info">
-                <div className="list-article-top">
-                    <p>{topic}</p>
-                    <p>{date}</p>
+        <article>
+            <Link
+                to={`/article/${articleId}`}
+                className="list-article-container"
+            >
+                <img className="list-article-image" src={imgURL} />
+                <div className="list-article-info">
+                    <div className="list-article-top">
+                        <p className="article-topic">{topic}</p>
+                        <p className="list-article-date">{date}</p>
+                    </div>
+                    <div>
+                        <h2 className="article-title">{title}</h2>
+                        <p>by {author}</p>
+                    </div>
+                    <div className="list-article-bot">
+                        <p>{votes} votes</p>
+                        <p>{commentCount} comments</p>
+                    </div>
                 </div>
-                <div>
-                    <h3>{title}</h3>
-                    <p>{author}</p>
-                </div>
-                <div className="list-article-bot">
-                    <p>Votes: {votes}</p>
-                    <p>Comments: {commentCount}</p>
-                    <Link to={`/article/${articleId}`}>To Article →</Link>
-                </div>
-            </div>
+            </Link>
         </article>
     );
 }

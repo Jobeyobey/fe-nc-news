@@ -15,21 +15,31 @@ function PaginationButtons({ totalCount, currPage, setCurrPage }) {
 
     return (
         <div className="pagination-container">
-            {currPage > 1 && (
-                <button id="page-back" onClick={handleClick}>
-                    Back
-                </button>
-            )}
+            <button
+                id="page-back"
+                onClick={handleClick}
+                className={`pagination-btn ${
+                    currPage > 1 ? "" : "pagination-disabled"
+                }`}
+                disabled={currPage > 1 ? false : true}
+            >
+                Back
+            </button>
             {maxPageNum > 1 && (
                 <p>
                     Page {currPage} of {maxPageNum}
                 </p>
             )}
-            {currPage < maxPageNum && (
-                <button id="page-next" onClick={handleClick}>
-                    Next
-                </button>
-            )}
+            <button
+                id="page-next"
+                onClick={handleClick}
+                className={`pagination-btn ${
+                    currPage < maxPageNum ? "" : "pagination-disabled"
+                }`}
+                disabled={currPage < maxPageNum ? false : true}
+            >
+                Next
+            </button>
         </div>
     );
 }

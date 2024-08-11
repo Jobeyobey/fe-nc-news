@@ -11,6 +11,8 @@ import {
     faArrowDownShortWide,
 } from "@fortawesome/free-solid-svg-icons";
 import AppBar from "../components/AppBar";
+import Lottie from "lottie-react";
+import loadingAnimation from "../../images/Loading.json";
 
 function HomePage() {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -108,7 +110,12 @@ function HomePage() {
             <AppBar />
             <section className="page-container">
                 {isLoading ? (
-                    <h1>Loading...</h1>
+                    <>
+                        <h1 className="loading-title">
+                            Loading your content...
+                        </h1>
+                        <Lottie animationData={loadingAnimation} loop={true} />
+                    </>
                 ) : (
                     <>
                         <div className="search-options">

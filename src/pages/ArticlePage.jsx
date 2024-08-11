@@ -7,6 +7,8 @@ import CommentSection from "../components/CommentSection";
 import Votes from "../components/Votes";
 import AppBar from "../components/AppBar";
 import { UserContext } from "../UserContext";
+import Lottie from "lottie-react";
+import loadingAnimation from "../../images/Loading.json";
 
 function ArticlePage() {
     const [article, setArticle] = useState({});
@@ -59,7 +61,12 @@ function ArticlePage() {
                         <Link to="/">Home</Link>
                     </>
                 ) : isLoading ? (
-                    <h1>Loading...</h1>
+                    <>
+                        <h1 className="loading-title">
+                            Loading your content...
+                        </h1>
+                        <Lottie animationData={loadingAnimation} loop={true} />
+                    </>
                 ) : (
                     <>
                         <Link to="/">← Home</Link>

@@ -1,7 +1,5 @@
 import { Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
-import AppBar from "./components/AppBar";
-import "./styles/App.css";
 import ArticlePage from "./pages/ArticlePage";
 import LoginPage from "./pages/LoginPage";
 import LogoutPage from "./pages/LogoutPage";
@@ -9,6 +7,8 @@ import NoEndpointPage from "./pages/NoEndpointPage";
 import { useContext } from "react";
 import { UserContext } from "./UserContext";
 import PostArticlePage from "./pages/PostArticlePage";
+import "./styles/App.css";
+import "./styles/Fonts.css";
 
 function App() {
     const user = useContext(UserContext);
