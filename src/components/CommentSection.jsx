@@ -30,6 +30,7 @@ function CommentSection({ articleId, commentCount }) {
                 author={comment.author}
                 createdAt={comment.created_at}
                 body={comment.body}
+                votes={comment.votes}
                 setComments={setComments}
             />
         );

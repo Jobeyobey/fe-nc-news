@@ -78,6 +78,14 @@ export function postCommentToArticle(articleId, body) {
         });
 }
 
+export function voteCommentById(commentId, vote) {
+    return axiosInstance
+        .patch(`comments/${commentId}`, { inc_votes: vote })
+        .then(({ data }) => {
+            return data.comment;
+        });
+}
+
 export function deleteCommentById(commentId) {
     return axiosInstance.delete(`comments/${commentId}`).then(() => {
         return "Deleted";

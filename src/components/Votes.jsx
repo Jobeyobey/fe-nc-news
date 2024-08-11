@@ -4,10 +4,9 @@ import {
     faCircleArrowDown,
 } from "@fortawesome/free-solid-svg-icons";
 import { useContext, useState } from "react";
-import { voteArticleById } from "../api";
 import { UserContext } from "../UserContext";
 
-function Votes({ votes, articleId }) {
+function Votes({ votes, uniqueId, voteFunc }) {
     const [voteStatus, setVoteStatus] = useState(null);
     const [voteTracker, setVoteTracker] = useState(votes);
     const [error, setError] = useState({});
@@ -21,7 +20,7 @@ function Votes({ votes, articleId }) {
             if (e.target.id === "vote-up" && voteStatus !== "vote-up") {
                 setVoteStatus("vote-up");
                 setVoteTracker(votes + 1);
-                voteArticleById(articleId, 1).catch(() => {
+                voteFunc(uniqueId, 1).catch(() => {
                     setError({
                         msg: "Unable to vote - Check your internet connection",
                     });
@@ -34,7 +33,7 @@ function Votes({ votes, articleId }) {
             ) {
                 setVoteStatus("vote-down");
                 setVoteTracker(votes - 1);
-                voteArticleById(articleId, -1).catch(() => {
+                voteFunc(uniqueId, -1).catch(() => {
                     setError({
                         msg: "Unable to vote - Check your internet connection",
                     });
@@ -47,7 +46,7 @@ function Votes({ votes, articleId }) {
                 const currVotes = voteTracker;
                 setVoteStatus(null);
                 setVoteTracker(votes);
-                voteArticleById(articleId, voteInc).catch(() => {
+                voteFunc(uniqueId, voteInc).catch(() => {
                     setError({
                         msg: "Unable to vote. Check your internet connection",
                     });

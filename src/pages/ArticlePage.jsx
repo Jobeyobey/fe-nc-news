@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
-import { deleteArticleById, getArticleById } from "../api";
+import { deleteArticleById, getArticleById, voteArticleById } from "../api";
 import "../styles/ArticlePage.css";
 import { dateToString } from "../utils";
 import CommentSection from "../components/CommentSection";
@@ -77,7 +77,8 @@ function ArticlePage() {
                         </p>
                         <Votes
                             votes={article.votes}
-                            articleId={article.article_id}
+                            uniqueId={article.article_id}
+                            voteFunc={voteArticleById}
                         />
 
                         {article.author !== user ? null : isDeleting ? (

@@ -1,15 +1,16 @@
 import { useContext, useState } from "react";
-import { deleteCommentById } from "../api";
+import { deleteCommentById, voteCommentById } from "../api";
 import { dateToString } from "../utils";
 import { UserContext } from "../UserContext";
+import Votes from "./Votes";
 
-function Comment({ commentId, author, createdAt, body, setComments }) {
+function Comment({ commentId, author, createdAt, body, votes, setComments }) {
     const [isDeleting, setIsDeleting] = useState(false);
     const [error, setError] = useState({});
 
     const dateString = dateToString(createdAt);
     const user = useContext(UserContext).user;
-
+    console.log(votes);
     function handleDelete(e) {
         e.preventDefault();
         const commentId = e.target.id;
@@ -57,6 +58,11 @@ function Comment({ commentId, author, createdAt, body, setComments }) {
                 )}
             </div>
             <p>{body}</p>
+            <Votes
+                votes={votes}
+                uniqueId={commentId}
+                voteFunc={voteCommentById}
+            />
         </div>
     );
 }
