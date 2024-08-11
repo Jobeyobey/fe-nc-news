@@ -4,6 +4,11 @@
     gap: 1rem;
 }
 
+.user-greeting {
+    margin-bottom: 1.5rem;
+    text-align: center;
+}
+
 .query-select {
     padding: 0.5rem;
     margin: 0 0 2rem 0;

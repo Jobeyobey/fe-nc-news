@@ -7,7 +7,14 @@ nav {
 .buttons-container {
     display: flex;
     justify-content: space-between;
-    padding: 1rem;
+    align-items: center;
+    padding: 1rem 2rem;
+}
+
+.nav-logo {
+    font-family: "share";
+    font-weight: 700;
+    font-size: 2rem;
 }
 
 .nav-logo,
@@ -22,5 +29,6 @@ nav {
 }
 
 .nav-button {
-    padding-left: 1rem;
+    padding: 1.55rem;
+    font-weight: 500;
 }
