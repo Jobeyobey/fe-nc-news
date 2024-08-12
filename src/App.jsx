@@ -3,7 +3,7 @@ import HomePage from "./pages/HomePage";
 import ArticlePage from "./pages/ArticlePage";
 import LoginPage from "./pages/LoginPage";
 import LogoutPage from "./pages/LogoutPage";
-import NoEndpointPage from "./pages/NoEndpointPage";
+import ErrorPage from "./pages/ErrorPage";
 import { useContext } from "react";
 import { UserContext } from "./UserContext";
 import PostArticlePage from "./pages/PostArticlePage";
@@ -25,7 +25,7 @@ function App() {
                         element={<ArticlePage />}
                     />
                     <Route path="/article/post" element={<PostArticlePage />} />
-                    <Route path="*" element={<NoEndpointPage />} />
+                    <Route path="*" element={<ErrorPage />} />
                 </Routes>
             </UserContext.Provider>
         </>

@@ -1,0 +1,15 @@
+.error-page-title {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+p {
+    margin-bottom: 2rem;
+}
+
+.link-home {
+    display: block;
+    margin: auto;
+    max-width: 12rem;
+    text-align: center;
+}
