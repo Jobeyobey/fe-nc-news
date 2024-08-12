@@ -7,6 +7,8 @@ import CommentSection from "../components/CommentSection";
 import Votes from "../components/Votes";
 import AppBar from "../components/AppBar";
 import { UserContext } from "../UserContext";
+import Lottie from "lottie-react";
+import loadingAnimation from "../../images/Loading.json";
 
 function ArticlePage() {
     const [article, setArticle] = useState({});
@@ -55,20 +57,28 @@ function ArticlePage() {
             <section className="page-container">
                 {isDeleted ? (
                     <>
-                        <h1>Your article has been successfully deleted</h1>
-                        <Link to="/">Home</Link>
+                        <h1 className="deleted-article-header">
+                            Your article has been successfully deleted
+                        </h1>
+                        <Link to="/" className="submit-btn home-center">
+                            Home
+                        </Link>
                     </>
                 ) : isLoading ? (
-                    <h1>Loading...</h1>
+                    <>
+                        <h1 className="loading-title">
+                            Loading your content...
+                        </h1>
+                        <Lottie animationData={loadingAnimation} loop={true} />
+                    </>
                 ) : (
                     <>
-                        <Link to="/">← Home</Link>
                         <img
                             src={article.article_img_url}
                             className="article-page-hero-image"
                         />
                         <div className="article-page-info">
-                            <p>{article.topic}</p>
+                            <p className="article-topic">{article.topic}</p>
                             <p>{date}</p>
                         </div>
                         <h1 className="article-page-title">{article.title}</h1>
@@ -82,12 +92,15 @@ function ArticlePage() {
                         />
 
                         {article.author !== user ? null : isDeleting ? (
-                            <button disabled>Deleting...</button>
+                            <button className="delete-btn" disabled>
+                                Deleting...
+                            </button>
                         ) : (
                             article.author !== "[Deleted]" && (
                                 <button
                                     id={article.article_id}
                                     onClick={handleDelete}
+                                    className="delete-btn"
                                 >
                                     Delete
                                 </button>
@@ -97,7 +110,7 @@ function ArticlePage() {
                             <p className="error-text">{error.msg}</p>
                         )}
 
-                        <p>{article.body}</p>
+                        <p className="article-page-body">{article.body}</p>
                         <CommentSection
                             articleId={article.article_id}
                             commentCount={article.comment_count}

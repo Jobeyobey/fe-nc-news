@@ -3,3 +3,19 @@
     flex-direction: column;
     gap: 1rem;
 }
+
+.post-article-header {
+    text-align: center;
+    margin-bottom: 1.5rem;
+}
+
+.input {
+    padding: 0.5rem;
+    color: black;
+    border: 2px solid #cfcfcf;
+    border-radius: 5px;
+}
+
+.input:focus {
+    border: 2px solid steelblue;
+}

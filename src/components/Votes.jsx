@@ -64,7 +64,11 @@ function Votes({ votes, uniqueId, voteFunc }) {
     return (
         <>
             <div className="votes-container">
-                <div id="vote-up" onClick={handleVote}>
+                <button
+                    id="vote-up"
+                    onClick={handleVote}
+                    className="vote-btn-element"
+                >
                     <FontAwesomeIcon
                         className={
                             voteStatus === "vote-up"
@@ -73,9 +77,13 @@ function Votes({ votes, uniqueId, voteFunc }) {
                         }
                         icon={faCircleArrowUp}
                     />
-                </div>
+                </button>
                 <p className="vote-text">{voteTracker}</p>
-                <div id="vote-down" onClick={handleVote}>
+                <button
+                    id="vote-down"
+                    onClick={handleVote}
+                    className="vote-btn-element"
+                >
                     <FontAwesomeIcon
                         className={
                             voteStatus === "vote-down"
@@ -84,10 +92,10 @@ function Votes({ votes, uniqueId, voteFunc }) {
                         }
                         icon={faCircleArrowDown}
                     />
-                </div>
+                </button>
             </div>
             {Object.keys(error).length > 0 && (
-                <p className="error-text">{error.msg}</p>
+                <p className="vote-error">{error.msg}</p>
             )}
         </>
     );

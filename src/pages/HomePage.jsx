@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import "../styles/HomePage.css";
 import { getAllTopics, getAllUsers, getArticles } from "../api";
 import Article from "../components/Article";
@@ -11,6 +11,9 @@ import {
     faArrowDownShortWide,
 } from "@fortawesome/free-solid-svg-icons";
 import AppBar from "../components/AppBar";
+import Lottie from "lottie-react";
+import loadingAnimation from "../../images/Loading.json";
+import { UserContext } from "../UserContext";
 
 function HomePage() {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -19,7 +22,9 @@ function HomePage() {
     const [isLoading, setIsLoading] = useState(true);
     const [topics, setTopics] = useState([]);
     const [isOrderedDesc, setIsOrderedDesc] = useState(true);
+
     const navigate = useNavigate();
+    const user = useContext(UserContext).user;
 
     useEffect(() => {
         setIsLoading(true);
@@ -108,9 +113,15 @@ function HomePage() {
             <AppBar />
             <section className="page-container">
                 {isLoading ? (
-                    <h1>Loading...</h1>
+                    <>
+                        <h1 className="loading-title">
+                            Loading your content...
+                        </h1>
+                        <Lottie animationData={loadingAnimation} loop={true} />
+                    </>
                 ) : (
                     <>
+                        {user && <h2 className="user-greeting">Hi, {user}!</h2>}
                         <div className="search-options">
                             <select
                                 name="topics"
@@ -152,7 +163,6 @@ function HomePage() {
                                 />
                             )}
                         </div>
-
                         {articleElements}
                         <PaginationButtons
                             totalCount={articles.article_count}

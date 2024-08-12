@@ -45,24 +45,31 @@ function Comment({ commentId, author, createdAt, body, votes, setComments }) {
                 <p className="error-text">{error.msg}</p>
             )}
             <div className="comment-top">
-                <p>{author}</p>
-                <p>{dateString}</p>
-                {author !== user ? null : isDeleting ? (
-                    <button disabled>Deleting...</button>
-                ) : (
-                    author !== "[Deleted]" && (
-                        <button id={commentId} onClick={handleDelete}>
-                            Delete
-                        </button>
-                    )
-                )}
+                <p className="comment-author">{author}</p>
+                <p className="comment-date">{dateString}</p>
             </div>
             <p>{body}</p>
-            <Votes
-                votes={votes}
-                uniqueId={commentId}
-                voteFunc={voteCommentById}
-            />
+            {author !== user ? (
+                <Votes
+                    votes={votes}
+                    uniqueId={commentId}
+                    voteFunc={voteCommentById}
+                />
+            ) : isDeleting ? (
+                <button className="delete-btn" disabled>
+                    Deleting...
+                </button>
+            ) : (
+                author !== "[Deleted]" && (
+                    <button
+                        id={commentId}
+                        onClick={handleDelete}
+                        className="delete-btn"
+                    >
+                        Delete
+                    </button>
+                )
+            )}
         </div>
     );
 }

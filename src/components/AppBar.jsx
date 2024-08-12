@@ -10,7 +10,7 @@ function AppBar() {
         <nav>
             <div className="buttons-container">
                 <Link to="/" className="nav-logo">
-                    Logo
+                    <em>WHAT'S NEWS?</em>
                 </Link>
                 <div>
                     {user ? (
