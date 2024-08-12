@@ -57,8 +57,12 @@ function ArticlePage() {
             <section className="page-container">
                 {isDeleted ? (
                     <>
-                        <h1>Your article has been successfully deleted</h1>
-                        <Link to="/">Home</Link>
+                        <h1 className="deleted-article-header">
+                            Your article has been successfully deleted
+                        </h1>
+                        <Link to="/" className="submit-btn home-center">
+                            Home
+                        </Link>
                     </>
                 ) : isLoading ? (
                     <>

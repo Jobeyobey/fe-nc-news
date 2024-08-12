@@ -40,7 +40,7 @@ function LoginPage() {
             setError({ msg: "User does not exist." });
         }
     }
-    console.log(error);
+
     return (
         <>
             <AppBar />

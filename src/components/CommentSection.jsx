@@ -15,7 +15,6 @@ function CommentSection({ articleId, commentCount }) {
     const [error, setError] = useState({});
 
     const user = useContext(UserContext).user;
-    console.log(user);
 
     useEffect(() => {
         setIsLoading(true);
