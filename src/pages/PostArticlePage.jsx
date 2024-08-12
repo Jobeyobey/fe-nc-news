@@ -182,7 +182,7 @@ function PostArticlePage() {
         <>
             <AppBar />
             <section className="page-container">
-                <h1>Post an article</h1>
+                <h1 className="post-article-header">Post an article</h1>
                 <form
                     id="article-form"
                     className="article-form"
@@ -195,6 +195,7 @@ function PostArticlePage() {
                         value={titleInput}
                         onChange={handleTitleChange}
                         autoComplete="off"
+                        className={`input ${error.titleError && "form-error"}`}
                     ></input>
                     {error.titleError && (
                         <p className="error-text">{error.titleError}</p>
@@ -202,7 +203,9 @@ function PostArticlePage() {
                     <select
                         name="topics"
                         id="topics"
-                        className="query-select"
+                        className={`input ${
+                            error.selectTopicError && "form-error"
+                        }`}
                         onChange={handleSelectTopicChange}
                         value={selectTopicInput}
                     >
@@ -222,6 +225,9 @@ function PostArticlePage() {
                                 value={newTopicInput.slug}
                                 onChange={handleNewTopicSlugChange}
                                 autoComplete="off"
+                                className={`input ${
+                                    error.newTopicError && "form-error"
+                                }`}
                             />
                             <input
                                 id="new-topic-description-input"
@@ -230,6 +236,9 @@ function PostArticlePage() {
                                 value={newTopicInput.description}
                                 onChange={handleNewTopicDescriptionChange}
                                 autoComplete="off"
+                                className={`input ${
+                                    error.newTopicError && "form-error"
+                                }`}
                             />
                             {error.newTopicError && (
                                 <p className="error-text">
@@ -244,6 +253,7 @@ function PostArticlePage() {
                         placeholder="Post body here..."
                         onChange={handleBodyChange}
                         value={bodyInput}
+                        className={`input ${error.bodyError && "form-error"}`}
                     />
                     {error.bodyError && (
                         <p className="error-text">{error.bodyError}</p>
@@ -255,14 +265,16 @@ function PostArticlePage() {
                         value={imgURLInput}
                         onChange={handleURLInputChange}
                         autoComplete="off"
+                        className={`input ${error.imgError && "form-error"}`}
                     ></input>
                     {error.imgError && (
                         <p className="error-text">{error.imgError}</p>
                     )}
-                    <button type="submit">Create Article</button>
+                    <button type="submit" className="submit-btn">
+                        Post Article
+                    </button>
                 </form>
             </section>
-            ;
         </>
     );
 }

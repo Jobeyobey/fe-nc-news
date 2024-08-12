@@ -41,8 +41,11 @@ body {
 }
 
 .error-text {
-    margin: 1rem 0;
     color: red;
+}
+
+.form-error {
+    border: 2px solid red;
 }
 
 .loading-title {

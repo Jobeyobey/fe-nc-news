@@ -65,6 +65,15 @@ function LoginPage() {
                     )}
                 </div>
                 <div className="login-explanation">
+                    <p className="user-list-title">Available users</p>
+                    <ul>
+                        <li>grumpy19</li>
+                        <li>tickle122</li>
+                        <li>happyamy2016</li>
+                        <li>cooljmessy</li>
+                        <li>weegembump</li>
+                        <li>jessjelly</li>
+                    </ul>
                     <p className="explanation-title">
                         <strong>User Authentication</strong>
                     </p>
@@ -82,15 +91,6 @@ function LoginPage() {
                         </span>
                         !
                     </p>
-                    <p className="user-list-title">Available users</p>
-                    <ul>
-                        <li>grumpy19</li>
-                        <li>tickle122</li>
-                        <li>happyamy2016</li>
-                        <li>cooljmessy</li>
-                        <li>weegembump</li>
-                        <li>jessjelly</li>
-                    </ul>
                 </div>
             </section>
         </>

@@ -41,11 +41,14 @@
 }
 
 .user-list-title {
-    margin-top: 1rem;
     font-weight: 500;
 }
 
 ul li {
-    margin-top: 0.5rem;
+    margin: 0.5rem;
     list-style-type: none;
+}
+
+.explanation-title {
+    margin-top: 1.5rem;
 }

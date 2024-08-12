@@ -32,3 +32,12 @@ nav {
     padding: 1.55rem;
     font-weight: 500;
 }
+
+@media (max-width: 720px) {
+    .nav-logo {
+        font-size: 1.2rem;
+    }
+    .nav-button {
+        padding: 1rem 0 0 1rem;
+    }
+}
