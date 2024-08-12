@@ -33,8 +33,12 @@ function ErrorPage() {
             <AppBar />
             <div className="page-container">
                 {/* <h1 className="error-page-title">Error {error.status}</h1> */}
-                <Lottie animationData={noEndpointAnimation} loop={true} />
-                <p>{error.msg}</p>
+                <Lottie
+                    animationData={noEndpointAnimation}
+                    loop={true}
+                    className="lottie-404"
+                />
+                <p className="error-text-404">{error.msg}</p>
                 <Link to="/" className="submit-btn link-home">
                     Let's get you home
                 </Link>

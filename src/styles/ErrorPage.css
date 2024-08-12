@@ -3,7 +3,13 @@
     text-align: center;
 }
 
-p {
+.lottie-404 {
+    margin: 4rem auto;
+    max-width: 75%;
+}
+
+.error-text-404 {
+    text-align: center;
     margin-bottom: 2rem;
 }
 
@@ -12,4 +18,10 @@ p {
     margin: auto;
     max-width: 12rem;
     text-align: center;
+}
+
+@media (max-width: 720px) {
+    .lottie-404 {
+        max-width: 100%;
+    }
 }
