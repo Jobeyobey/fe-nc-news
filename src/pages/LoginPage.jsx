@@ -37,10 +37,10 @@ function LoginPage() {
             user.setUser(inputName);
             setSuccessfulLogin(true);
         } else {
-            setError({ msg: "User does not exist. Test Account: grumpy19" });
+            setError({ msg: "User does not exist." });
         }
     }
-
+    console.log(error);
     return (
         <>
             <AppBar />
@@ -54,7 +54,11 @@ function LoginPage() {
                             placeholder="Username"
                             value={usernameInput}
                             onChange={handleChange}
+                            className={`input ${
+                                Object.keys(error).length > 0 && "form-error"
+                            }`}
                             autoComplete="off"
+                            autoFocus
                         ></input>
                         <button type="submit" className="login-btn">
                             Login

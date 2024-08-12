@@ -77,6 +77,11 @@
     padding: 0.5rem;
 }
 
+.vote-error {
+    color: red;
+    margin-top: 1rem;
+}
+
 .comment-section {
     margin-top: 2rem;
     border-radius: 5px;

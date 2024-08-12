@@ -1,10 +1,10 @@
 import { useContext, useEffect, useState } from "react";
 import AppBar from "../components/AppBar";
 import { getAllTopics, postArticle, postTopic } from "../api";
-import "../styles/PostArticlePage.css";
 import { UserContext } from "../UserContext";
 import { useNavigate } from "react-router-dom";
 import { checkIsImgURL } from "../utils";
+import "../styles/PostArticlePage.css";
 
 function PostArticlePage() {
     const [topics, setTopics] = useState([]);

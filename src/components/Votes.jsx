@@ -95,7 +95,7 @@ function Votes({ votes, uniqueId, voteFunc }) {
                 </button>
             </div>
             {Object.keys(error).length > 0 && (
-                <p className="error-text">{error.msg}</p>
+                <p className="vote-error">{error.msg}</p>
             )}
         </>
     );

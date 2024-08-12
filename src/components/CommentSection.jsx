@@ -15,6 +15,7 @@ function CommentSection({ articleId, commentCount }) {
     const [error, setError] = useState({});
 
     const user = useContext(UserContext).user;
+    console.log(user);
 
     useEffect(() => {
         setIsLoading(true);
@@ -45,9 +46,11 @@ function CommentSection({ articleId, commentCount }) {
     function handleSubmit(e) {
         e.preventDefault();
         setError({});
-        if (newCommentBody === "") {
+        if (user === null) {
+            setError({ msg: "You must be logged in to comment." });
+        } else if (newCommentBody === "") {
             setError({ msg: "Please write a comment before submitting" });
-        } else if (user) {
+        } else {
             setIsPostingComment(true);
             postCommentToArticle(articleId, newCommentBody)
                 .then((newComment) => {
@@ -63,8 +66,6 @@ function CommentSection({ articleId, commentCount }) {
                     setIsPostingComment(false);
                 });
             setNewCommentBody("");
-        } else {
-            setError({ msg: "You must be logged in to comment." });
         }
     }
 
@@ -112,11 +113,7 @@ function CommentSection({ articleId, commentCount }) {
                                     Submitting...
                                 </button>
                             ) : (
-                                <button
-                                    type="submit"
-                                    className="submit-btn"
-                                    disabled={user ? false : true}
-                                >
+                                <button type="submit" className="submit-btn">
                                     Submit
                                 </button>
                             )}

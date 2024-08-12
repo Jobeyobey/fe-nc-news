@@ -121,7 +121,7 @@ function HomePage() {
                     </>
                 ) : (
                     <>
-                        <h2 className="user-greeting">Hi, {user}!</h2>
+                        {user && <h2 className="user-greeting">Hi, {user}!</h2>}
                         <div className="search-options">
                             <select
                                 name="topics"
